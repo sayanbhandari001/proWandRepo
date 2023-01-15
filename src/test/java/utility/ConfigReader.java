@@ -32,7 +32,6 @@ public class ConfigReader {
 	public static String getprojectData() throws IOException {
 		return getPropertyObject().getProperty("getprojectTaskData");
 	}
-	
 	WebDriver driver;
 }
 
