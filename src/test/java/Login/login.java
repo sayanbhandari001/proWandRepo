@@ -117,14 +117,12 @@ import weekSelectionAndLogging.WeekHelper;
 		billingItemListVerification.click();
 
 	}
-
 	@BeforeClass
 	public void startSystem() throws IOException {
 		new ConfigReader();
 		driver.manage().window().maximize();
     	driver.get(ConfigReader.getUrl());
-}
-
+	}
 	@AfterClass
 	public void systemClose() {
 		driver.quit();
