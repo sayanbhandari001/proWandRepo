@@ -33,5 +33,6 @@ public class ConfigReader {
 		return getPropertyObject().getProperty("getprojectTaskData");
 	}
 	WebDriver driver;
+	
 }
 
