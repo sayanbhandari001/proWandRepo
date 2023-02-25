@@ -1,5 +1,8 @@
 package utility;
 
+import java.awt.HeadlessException;
+import java.io.IOException;
+
 import javax.swing.JOptionPane;
 
 import org.testng.TestListenerAdapter;
@@ -9,9 +12,9 @@ import Login.login;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws HeadlessException, IOException {
 		int dialogButtonOptions = JOptionPane.YES_NO_OPTION;
-	    int dialogButtonClicked = JOptionPane.showConfirmDialog (null, "Do you want to proceed to submitting your attendance?","Warning",dialogButtonOptions);
+	    int dialogButtonClicked = JOptionPane.showConfirmDialog (null, ConfigReader.confirmDialogMessage(), ConfigReader.confirmDialogTitle(), dialogButtonOptions);
 
 	    if (dialogButtonClicked == JOptionPane.YES_OPTION) { //The ISSUE is here
 			TestListenerAdapter tla = new TestListenerAdapter();
@@ -22,7 +25,7 @@ public class Main {
 		    
 	    } else {
 	    	
-		    JOptionPane.showMessageDialog (null, "You have chosen not to continue submiiting the attendance.","Warning",JOptionPane.OK_OPTION);
+		    JOptionPane.showMessageDialog (null, ConfigReader.alertDialogMessage(), ConfigReader.alertDialogTitle(), JOptionPane.OK_OPTION);
 	    }
 	}
 

@@ -60,32 +60,32 @@ import weekSelectionAndLogging.WeekHelper;
 		// submissionListStartHour
 		Select submissionListStartHour = new Select(
 				driver.findElement(By.id("billingDetailItems" + dayOfTheWeekIndex + ".billingTimeSpans0.startHourM")));
-		submissionListStartHour.selectByValue("11");
+		submissionListStartHour.selectByValue(ConfigReader.from_hh());
 
 		// submissionListStartMin
 		Select submissionListStartMin = new Select(
 				driver.findElement(By.id("billingDetailItems" + dayOfTheWeekIndex + ".billingTimeSpans0.startMinute")));
-		submissionListStartMin.selectByValue("30");
+		submissionListStartMin.selectByValue(ConfigReader.from_mm());
 
 		// submissionListStartMeridiem
 		Select submissionListStartMeridiem = new Select(driver
 				.findElement(By.id("billingDetailItems" + dayOfTheWeekIndex + ".billingTimeSpans0.startMeridiem")));
-		submissionListStartMeridiem.selectByVisibleText("AM");
+		submissionListStartMeridiem.selectByVisibleText(ConfigReader.from_a());
 
 		// submissionListEndHour
 		Select submissionListEndHour = new Select(
 				driver.findElement(By.id("billingDetailItems" + dayOfTheWeekIndex + ".billingTimeSpans0.endHourM")));
-		submissionListEndHour.selectByValue("8");
+		submissionListEndHour.selectByValue(ConfigReader.to_hh());
 
 		// submissionListEndMin
 		Select submissionListEndMin = new Select(
 				driver.findElement(By.id("billingDetailItems" + dayOfTheWeekIndex + ".billingTimeSpans0.endMinute")));
-		submissionListEndMin.selectByValue("30");
+		submissionListEndMin.selectByValue(ConfigReader.to_mm());
 
 		// submissionListStartMeridiem
 		Select submissionListEndMeridiem = new Select(
 				driver.findElement(By.id("billingDetailItems" + dayOfTheWeekIndex + ".billingTimeSpans0.endMeridiem")));
-		submissionListEndMeridiem.selectByVisibleText("PM");
+		submissionListEndMeridiem.selectByVisibleText(ConfigReader.to_a());
 
 		// Type_of_Work
 		Select type_of_Work = new Select(driver
@@ -122,6 +122,7 @@ import weekSelectionAndLogging.WeekHelper;
 		new ConfigReader();
 		driver.manage().window().maximize();
     	driver.get(ConfigReader.getUrl());
+    	
 	}
 	@AfterClass
 	public void systemClose() {
