@@ -20,7 +20,7 @@ public class ConfigReader {
 	public static String getUrl() throws IOException {
 		return getPropertyObject().getProperty("url");
 	}
-	
+	 
 	public static String getUsername() throws IOException {
 		return getPropertyObject().getProperty("username");
 	}
