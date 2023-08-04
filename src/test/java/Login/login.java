@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,10 +20,11 @@ import utility.ConfigReader;
 import weekSelectionAndLogging.WeekHelper;
 
  public class login extends ConfigReader {
-
+	 
+	 
 	WebDriver driver = new ChromeDriver();
-
 	
+
 	@Test(priority = 1)
 	public void loginWand() throws IOException {
 		new ConfigReader();
@@ -46,16 +48,22 @@ import weekSelectionAndLogging.WeekHelper;
 		// submit
 		driver.findElement(By.xpath("//*[@type='submit' and @id='loginButton']")).click();
 
-		// Time
-		Select getSelectionValue = new Select(driver.findElement(By.xpath("//select[@id='selectedBillingType']")));
-		getSelectionValue.selectByValue("Time");
+//		// Time
+//		Select getSelectionValue = new Select(driver.findElement(By.xpath("//select[@id='selectedBillingType']")));
+//		getSelectionValue.selectByValue("Time");
 
 		// SelectDaterance
-		Select SelectDaterance = new Select(driver.findElement(By.xpath("//Select[@id='dateRangeString']")));
+		WebDriverWait dateRangeSelectorWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		dateRangeSelectorWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='mat-form-field-infix ng-tns-c83-5']")));
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='dateRangeString']")).click();
+		
+		//Select the date range
+		WebElement dateRangeSelector = driver.findElement(By.xpath("//div[@class='cdk-overlay-pane']//div"));
+		Select SelectDaterance = new Select(dateRangeSelector);
 		SelectDaterance.selectByValue(WeekHelper.getSelectionValue(currDate));
 
 		// Add Time & Expense
-		driver.findElement(By.xpath("//input[@value='Submit']")).click();
+		driver.findElement(By.xpath("//span[contains(text(),'Add Time')]")).click();
 
 		// submissionListStartHour
 		Select submissionListStartHour = new Select(
@@ -122,6 +130,8 @@ import weekSelectionAndLogging.WeekHelper;
 		new ConfigReader();
 		driver.manage().window().maximize();
     	driver.get(ConfigReader.getUrl());
+    	ChromeOptions options = new ChromeOptions();
+    	options.addArguments("--remote-allow-origins=*");
     	
 	}
 	@AfterClass
